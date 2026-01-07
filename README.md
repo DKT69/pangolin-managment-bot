@@ -41,8 +41,8 @@ The bot is built with Node.js and uses:
 ```yml
 services:
   server-bot:
-    container_name: server-bot
-    image: hhftechnology/pangolin-discord-bot:latest
+    container_name: discord-server-bot
+    image: ghcr.io/dkt69/pangolin-managment-bot:test
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./backups:/app/backups
@@ -97,10 +97,10 @@ The bot supports automatic restarting of unhealthy containers. Configure contain
 - `/startcontainer` - Start a stopped container
 - `/stopcontainer` - Stop a running container  
 - `/restartcontainer` - Restart a container
+- `/dockerlogs` - View logs from any containers
 
 ### Pangolin Stack
 - `/pangolinstatus` - Check overall Pangolin stack status
-- `/pangolinlogs` - View logs from Pangolin containers
 - `/stackhealth` - Detailed health check of all components
 - `/backup` - Create a backup of your configuration
 - `/restorebackup` - Restore from a previous backup
