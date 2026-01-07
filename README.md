@@ -1,3 +1,5 @@
+# This project is fork by HHF Technology for Pangolin self-hosters
+
 # Pangolin Discord Bot
 
 A comprehensive Discord bot for remotely monitoring and controlling Docker containers on your VPS server, with specialized support for the Pangolin stack (including Traefik, CrowdSec, and other microservices).
