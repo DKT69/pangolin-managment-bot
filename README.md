@@ -1,4 +1,6 @@
-# This project is fork by HHF Technology for Pangolin self-hosters
+# This project is fork by HHF Technology for Pangolin
+
+
 
 # Pangolin Discord Bot
 
