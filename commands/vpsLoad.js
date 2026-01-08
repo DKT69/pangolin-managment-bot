@@ -98,9 +98,9 @@ module.exports = {
             `**Usage :** ${memory.usagePercent}%`,
             `${progressBar(memory.usagePercent)}`,
             ``,
-            `**Used :** ${memory.used}`,
-            `**Free :** ${memory.free}`,
-            `**Total :** ${memory.total}`
+            `**Used :** ${memory.used} MB`,
+            `**Free :** ${memory.free} MB`,
+            `**Total :** ${memory.total} MB`
           ].join('\n'),
           inline: true
         });
