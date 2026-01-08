@@ -70,7 +70,7 @@ module.exports = {
         ))
     .addIntegerOption(option =>
       option.setName('lines')
-        .setDescription('Number of log lines to show (default: 20)')
+        .setDescription('Number of log lines to show (default: 10)')
         .setRequired(false))
     .addStringOption(option =>
       option.setName('filter')
@@ -81,7 +81,7 @@ module.exports = {
 
     try {
       const containerName = interaction.options.getString('container');
-      const lines = interaction.options.getInteger('lines') || 20;
+      const lines = interaction.options.getInteger('lines') || 10;
       const filter = interaction.options.getString('filter');
 
       // Get logs using our new function

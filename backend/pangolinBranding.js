@@ -30,7 +30,8 @@ module.exports = {
     pangolin: '🦔',  // Pangolin mascot (closest emoji is hedgehog)
     gerbil: '🐹',    // Gerbil container  
     traefik: '🌐',   // For network/proxy
-    crowdsec: '🛡️'   // For security
+    crowdsec: '🛡️',  // For security
+    pc: '🖥️'      // For system metrics
   },
 
   // Footer text for all embeds
