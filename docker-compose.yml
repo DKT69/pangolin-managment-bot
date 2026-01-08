@@ -9,9 +9,9 @@ services:
       - /sys:/host/sys:ro    # Read-only access to sys filesystem
       - /root:/root:ro  # Mount the Pangolin root directory as read-only
     environment:
-      - DISCORD_TOKEN=your_token_here
-      - DISCORD_CLIENT_ID=your_client_id_here
-      - DISCORD_GUILD_ID=your_guild_id_here
+      - DISCORD_TOKEN=${DISCORD_TOKEN}
+      - DISCORD_CLIENT_ID=${DISCORD_CLIENT_ID}
+      - DISCORD_GUILD_ID=${DISCORD_GUILD_ID}
       - BACKUP_DIR=/app/backups
       - HOST_PROC=/host/proc  # Point to the mounted proc directory
       - HOST_SYS=/host/sys    # Point to the mounted sys directory
