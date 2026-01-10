@@ -2,6 +2,7 @@
 const { SlashCommandBuilder } = require("discord.js");
 const systemMetrics = require("../backend/systemMetrics");
 const branding = require('../backend/pangolinBranding');
+const os = require('os');
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -41,11 +42,12 @@ module.exports = {
       } else {
         embed.setColor(branding.colors.success);
       }
-      const os = require('os');
-      const cpuModel = os.cpus()[0].model;
+      const cpus = os.cpus();
+      const cpuModel = cpus[0].model.trim();
+      const coreCount = cpus.length; // This counts all available threads/cores
 
       // Update description with overall status
-      embed.setDescription(`**${branding.emojis.pc} ${cpuModel} ${cpu.cores} CORES**`);
+      embed.setDescription(`**${branding.emojis.pc} ${cpuModel} - ${coreCount} Core**\n\u200b`);
 
       // ---------- Helpers ----------
       const getStatusEmoji = (percent, branding) => {
@@ -54,7 +56,7 @@ module.exports = {
         return branding.emojis.healthy;
       };
 
-      const progressBar = (percent, size = 8) => {
+      const progressBar = (percent, size = 9) => {
         const filled = Math.round((percent / 100) * size);
         return `▰`.repeat(filled) + `▱`.repeat(size - filled);
       };
@@ -75,9 +77,9 @@ module.exports = {
             `${progressBar(cpu.usage)}`,
             ``,
             `**Load Avg**`,
-            `${loadColor(cpu.loadAvg1, cpu.cores)} ${cpu.loadAvg1} (1m)`,
-            `${loadColor(cpu.loadAvg5, cpu.cores)} ${cpu.loadAvg5} (5m)`,
-            `${loadColor(cpu.loadAvg15, cpu.cores)} ${cpu.loadAvg15} (15m)`,
+            `${loadColor(cpu.loadAvg1, cpu.cores)} **1Min :** ${cpu.loadAvg1}%`,
+            `${loadColor(cpu.loadAvg5, cpu.cores)} **5Min :** ${cpu.loadAvg5}%`,
+            `${loadColor(cpu.loadAvg15, cpu.cores)} **15Min :** ${cpu.loadAvg15}%`,
           ].join('\n'),
           inline: true
         });
@@ -98,6 +100,7 @@ module.exports = {
             `**Usage :** ${memory.usagePercent}%`,
             `${progressBar(memory.usagePercent)}`,
             ``,
+            `**Ram Details**`,
             `**Used :** ${memory.used} MB`,
             `**Free :** ${memory.free} MB`,
             `**Total :** ${memory.total} MB`
@@ -121,6 +124,7 @@ module.exports = {
             `**Usage :** ${disk.usagePercent}%`,
             `${progressBar(disk.usagePercent)}`,
             ``,
+            `**Disk Details**`,
             `**Used :** ${disk.used}`,
             `**Free :** ${disk.free}`,
             `**Total :** ${disk.total}`
