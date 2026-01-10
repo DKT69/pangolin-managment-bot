@@ -1,10 +1,22 @@
 # This project is fork by HHF Technology for Pangolin
 
-- **VPS LOAD**
-![alt text](image.png)
-
-- **Crowdsec Decisions Add**
-![alt text](image-1.png)
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <img src="image.png" alt="VPS Load" width="400">
+        <br>
+        <sub><b>Vps Load</b></sub>
+      </td>
+      <td align="center">
+        <img src="image-1.png" alt="Crowdsec Decision Add" width="400">
+        <br>
+        <sub><b>Crowdsec Decision Add</b></sub>
+      </td>
+    </tr>
+  </table>
+</div>
+---
 
 
 # Pangolin Discord Bot
