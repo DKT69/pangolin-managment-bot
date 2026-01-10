@@ -1,4 +1,4 @@
-# ❤️This project is fork by HHF Technology for Pangolin❤️
+# This project is fork by HHF Technology for Pangolin
 
 
 
