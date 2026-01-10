@@ -337,22 +337,12 @@ module.exports = {
           `Reason: ${reason || 'manual (default)'}`
         ];
 
-        embed.addFields({ name: 'Decision Details', value: details.join('\n') });
-
         const outputContent = result.stdout || 'Operation completed successfully.';
 
-        // Send the output as a file attachment if there's meaningful content
-        if (outputContent.trim() !== '') {
-          await interaction.editReply({
-            embeds: [embed],
-            files: [{
-              attachment: Buffer.from(outputContent),
-              name: `crowdsec-add-decision.txt`
-            }]
-          });
-        } else {
-          await interaction.editReply({ embeds: [embed] });
-        }
+        const fieldValue = `\`\`\`${outputContent.trim()}\`\`\`\n**${details.join('\n')}**`;
+        embed.addFields({ name: 'Decision Details', value: fieldValue });
+
+        await interaction.editReply({ embeds: [embed] });
 
       } else if (subcommand === 'delete') {
         console.log('Executing delete subcommand');
@@ -417,24 +407,14 @@ module.exports = {
         if (type) filterDetails.push(`Type: ${type}`);
         if (scope && value) filterDetails.push(`${scope}: ${value}`);
 
-        if (filterDetails.length > 0) {
-          embed.addFields({ name: 'Deleted Decisions Matching', value: filterDetails.join('\n') });
-        }
-
         const outputContent = result.stdout || 'Operation completed successfully.';
 
-        // Send the output as a file attachment if there's meaningful content
-        if (outputContent.trim() !== '') {
-          await interaction.editReply({
-            embeds: [embed],
-            files: [{
-              attachment: Buffer.from(outputContent),
-              name: `crowdsec-delete-decision.txt`
-            }]
-          });
-        } else {
-          await interaction.editReply({ embeds: [embed] });
+        if (filterDetails.length > 0) {
+          const fieldValue = `\`\`\`${outputContent.trim()}\`\`\`\n**${filterDetails.join('\n')}**`;
+          embed.addFields({ name: 'Deleted Decisions Matching', value: fieldValue });
         }
+
+        await interaction.editReply({ embeds: [embed] });
 
       } else if (subcommand === 'import') {
         console.log('Executing import subcommand');
