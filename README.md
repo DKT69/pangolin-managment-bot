@@ -43,21 +43,24 @@ The bot is built with Node.js and uses:
 ```yml
 services:
   server-bot:
-    container_name: discord-server-bot
-    image: ghcr.io/dkt69/pangolin-managment-bot:test
+    container_name: DiscordServerBot
+    image : ghcr.io/dkt69/pangolin-managment-bot:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./backups:/app/backups
       - /proc:/host/proc:ro  # Read-only access to proc filesystem
       - /sys:/host/sys:ro    # Read-only access to sys filesystem
       - /root:/root  # Mount the Pangolin root directory. all pangolin files have to be here other wise backup and restore function will not work
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
     environment:
-      - DISCORD_TOKEN=MTI5MDjdfposdjvjsdpvjpdsjvpdsjv.ncsabhiu.cihoichasohcsacpos #required
-      - DISCORD_CLIENT_ID=11646164184164646 #required
-      - DISCORD_GUILD_ID=913641641368909884 #optional
+      - DISCORD_TOKEN=${DISCORD_TOKEN} #Bot Token
+      - DISCORD_CLIENT_ID=${DISCORD_CLIENT_ID} #Application ID
+      - DISCORD_GUILD_ID=${DISCORD_GUILD_ID} #Disocrd Guiild ID
       - BACKUP_DIR=/app/backups
       - HOST_PROC=/host/proc  # Point to the mounted proc directory
       - HOST_SYS=/host/sys    # Point to the mounted sys directory
+      - TZ=${TZ}
     restart: unless-stopped
    ```
 
@@ -74,8 +77,8 @@ services:
 2. Create a new application
 3. Navigate to the "Bot" tab and create a bot
 4. Enable "Server Members Intent" and "Message Content Intent"
-5. Copy the bot token to your `.env` file
-6. Generate an invite link with the "bot" and "applications.commands" scopes
+5. Copy the (General Information -> #Application ID) and (Bot -> #Token) to your `.env` file
+6. OAuth2 -> Generate an invite link with the "bot" and "applications.commands" scopes
 7. Invite the bot to your server
 
 ### Auto-Restart Configuration
@@ -96,10 +99,10 @@ The bot supports automatic restarting of unhealthy containers. Configure contain
 - `/dockerremove` - Remove a Docker container
 - `/dockerremoveimage` - Remove a Docker image
 - `/dockershow` - Show detailed container information
+- `/dockerlogs` - View logs from any containers
 - `/startcontainer` - Start a stopped container
 - `/stopcontainer` - Stop a running container  
 - `/restartcontainer` - Restart a container
-- `/dockerlogs` - View logs from any containers
 
 ### Pangolin Stack
 - `/pangolinstatus` - Check overall Pangolin stack status
