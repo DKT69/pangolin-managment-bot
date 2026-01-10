@@ -2,6 +2,13 @@ FROM node:19-slim
 
 WORKDIR /app
 
+
+# Install tzdata and set timezone
+RUN apk add --no-cache tzdata \
+  && ln -snf /usr/share/zoneinfo/${TZ:-UTC} /etc/localtime \
+  && echo ${TZ:-UTC} > /etc/timezone
+
+  
 # Copy package files first for better layer caching
 COPY package.json /app
 RUN npm install
